@@ -116,7 +116,22 @@ def odchylenie_standardowe(lista):
     odchylenie = math.sqrt(wariancja(lista))
     return odchylenie
 
+def kowariancja(macierz):
+    return np.dot(macierz.T,macierz)
 
+def odwrotnosc_macierzy(macierz):
+    return np.linalg.inv(macierz)
+
+def lewa_odwrotnosc(macierz):
+    k = kowariancja(macierz)
+    odwrotnosc = odwrotnosc_macierzy(k)
+    return np.dot(odwrotnosc,macierz.T)
+  
+def regresja_liniowa(macierz):
+    x=np.array([[1,x[0]]for x in macierz])
+    y=np.array([x[1]for x in macierz])
+    lewo = lewa_odwrotnosc(x)
+    return np.dot(lewo,y)
 
 
 
